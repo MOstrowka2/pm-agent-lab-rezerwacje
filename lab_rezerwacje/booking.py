@@ -31,3 +31,16 @@ class ReservationBook:
         reservation = Reservation(f"R-{next(self._ids)}", desk_id, owner, slot)
         self.reservations.append(reservation)
         return reservation
+
+
+import threading
+
+_LOCK = threading.Lock()
+
+
+def reserve_safely(book: ReservationBook, desk_id: str, owner: str, slot: Slot) -> Reservation:
+    """Równoległe żądania tego samego stanowiska: jedno przyjęte, drugie odrzucone (AC-2)."""
+    with _LOCK:
+        return book.reserve(desk_id, owner, slot)
+
+# przebieg scenariusza eaedff
