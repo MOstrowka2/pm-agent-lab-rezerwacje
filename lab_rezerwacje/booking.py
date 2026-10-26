@@ -44,3 +44,5 @@ def reserve_safely(book: ReservationBook, desk_id: str, owner: str, slot: Slot) 
         return book.reserve(desk_id, owner, slot)
 
 # przebieg scenariusza eaedff
+
+# przebieg scenariusza d95159
